@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,300;1,400&display=swap');
+
+.syncouch-player {
+  position: relative;
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+
+  width: 100vw;
+
+  background-color: black;
+
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+
+  box-sizing: border-box;
+
+  * {
+    font-family: inherit;
+    font-weight: inherit;
+    box-sizing: inherit;
+  }
+
+  video {
+    width: 100vw;
+  }
+
+  .video-subtitles {
+    background: transparent;
+    color: white;
+
+    white-space: break-spaces;
+
+    position: absolute;
+    z-index: 101;
+
+    bottom: 10%;
+    width: 100vw;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: calc(100vw * 0.025);
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 1);
+    text-align: center;
+  }
+
+  .syncouch-player--content {
+    position: absolute;
+    z-index: 100;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}

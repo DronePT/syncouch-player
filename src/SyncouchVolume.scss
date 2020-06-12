@@ -1,0 +1,48 @@
+.SyncouchVolume {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    > div.SyncouchVolume-control {
+      display: block;
+    }
+  }
+
+  > div.SyncouchVolume-control {
+    display: none;
+
+    position: absolute;
+    right: -1em;
+    top: 0;
+
+    transform: translateY(-100%);
+
+    font-size: 16px;
+
+    background: rgba(13, 0, 26, 1);
+    border-radius: 0.75em;
+
+    padding: 0.5em;
+
+    .SyncouchVolume-control-container {
+      position: relative;
+
+      background: rgba(0, 201, 164, 0.15);
+
+      width: 10em;
+      height: 0.5em;
+
+      border-radius: 0.25em;
+      overflow: hidden;
+
+      .SyncouchVolume-control-slider {
+        position: absolute;
+
+        height: 100%;
+        background: rgba(0, 201, 164, 1);
+      }
+    }
+  }
+}
