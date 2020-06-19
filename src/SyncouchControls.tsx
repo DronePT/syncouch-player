@@ -31,6 +31,7 @@ interface SynccouchControlsProps {
   onFullScreenClick(): void;
   onSubtitleClick?(index: number): void;
   onVolumeChange?(number: number): void;
+  onSubtitleFromPc?(files: FileList): void;
 }
 
 const SyncouchControls: React.FC<SynccouchControlsProps> = ({
@@ -46,6 +47,7 @@ const SyncouchControls: React.FC<SynccouchControlsProps> = ({
   onVolumeChange,
   onSubtitleClick,
   onPlayPauseClick,
+  onSubtitleFromPc,
   onFullScreenClick,
 }) => {
   return (
@@ -73,7 +75,11 @@ const SyncouchControls: React.FC<SynccouchControlsProps> = ({
           data-state="subtitles"
         >
           <FontAwesomeIcon icon={faClosedCaptioning} fixedWidth />
-          <SyncouchSubtitles subtitles={subtitles} onClick={onSubtitleClick} />
+          <SyncouchSubtitles
+            subtitles={subtitles}
+            onClick={onSubtitleClick}
+            onSubtitleFromPc={onSubtitleFromPc}
+          />
         </button>
 
         <button id="fs" type="button" data-state="go-fullscreen" onClick={onFullScreenClick}>

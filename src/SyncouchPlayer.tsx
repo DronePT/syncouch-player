@@ -23,6 +23,7 @@ interface SyncouchPlayerProps {
   onVideoLoading?(): void;
   onVideoReady?(): void;
   onVolumeChange?(volume: number): void;
+  onSubtitleFromPc?(files: FileList): void;
 }
 
 const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
@@ -38,6 +39,7 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
   onPlayerReady,
   onVideoLoading,
   onVolumeChange,
+  onSubtitleFromPc,
   onDimensionsReady,
 }) => {
   const videoPlayerRef = useRef<HTMLDivElement | null>(null);
@@ -229,6 +231,7 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
         onFullScreenClick={syncouchVideoActions.fullScreenClickHandler}
         onSubtitleClick={syncouchVideoActions.subtitleClickHandler}
         onVolumeChange={syncouchVideoActions.volumeChangeHandler}
+        onSubtitleFromPc={onSubtitleFromPc}
       />
 
       <div className="syncouch-player--content">{children}</div>

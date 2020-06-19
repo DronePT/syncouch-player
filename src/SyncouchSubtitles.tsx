@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 
 export interface Subtitle {
   label: string;
@@ -11,11 +11,49 @@ export interface Subtitle {
 interface SyncouchSubtitlesProps {
   subtitles?: Subtitle[];
   onClick?(index: number): void;
+  onSubtitleFromPc?(files: FileList): void;
 }
 
-const SyncouchSubtitles: React.FC<SyncouchSubtitlesProps> = ({ subtitles, onClick }) => {
+const SyncouchSubtitles: React.FC<SyncouchSubtitlesProps> = ({
+  subtitles,
+  onClick,
+  onSubtitleFromPc,
+}) => {
+  const fileRef = useRef<HTMLInputElement | null>(null);
+
+  const handleComputerSubtitleClick = useCallback(
+    (event: React.MouseEvent) => {
+      // event.preventDefault();
+      console.warn('hey#1', event.target);
+      if (!fileRef.current) return;
+
+      console.warn('hey#2', fileRef.current);
+      fileRef.current.click();
+    },
+    [fileRef]
+  );
+
   return (
     <ul>
+      <li>
+        <div
+          role="button"
+          className="SyncouchSubtitlesFromPc"
+          onClick={handleComputerSubtitleClick}
+        >
+          <input
+            ref={fileRef}
+            type="file"
+            name="computer-subtitle"
+            onChange={(event) => {
+              if (onSubtitleFromPc && event.target.files) {
+                onSubtitleFromPc(event.target.files);
+              }
+            }}
+          />
+          Select from computer
+        </div>
+      </li>
       {subtitles &&
         subtitles
           .sort((a, b) => {
