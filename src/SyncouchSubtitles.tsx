@@ -22,12 +22,9 @@ const SyncouchSubtitles: React.FC<SyncouchSubtitlesProps> = ({
   const fileRef = useRef<HTMLInputElement | null>(null);
 
   const handleComputerSubtitleClick = useCallback(
-    (event: React.MouseEvent) => {
+    (_event: React.MouseEvent) => {
       // event.preventDefault();
-      console.warn('hey#1', event.target);
       if (!fileRef.current) return;
-
-      console.warn('hey#2', fileRef.current);
       fileRef.current.click();
     },
     [fileRef]
@@ -43,8 +40,10 @@ const SyncouchSubtitles: React.FC<SyncouchSubtitlesProps> = ({
         >
           <input
             ref={fileRef}
+            multiple
             type="file"
             name="computer-subtitle"
+            accept=".srt,.vtt"
             onChange={(event) => {
               if (onSubtitleFromPc && event.target.files) {
                 onSubtitleFromPc(event.target.files);
