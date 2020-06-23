@@ -11,6 +11,7 @@ import SyncouchControls from './SyncouchControls';
 import { Subtitle } from './SyncouchSubtitles';
 
 interface SyncouchPlayerProps {
+  children?: React.ReactNode;
   src: string;
   type?: string;
   label?: string;
@@ -55,6 +56,43 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
   const [volume, setVolume] = useState(0);
 
   const syncouchVideoActions = useSyncouchVideoActions(videoAPI, videoPlayerRef.current);
+
+  const videoEl = videoRef.current;
+
+  useEffect(() => {
+    // effect
+    if (!videoEl || !videoAPI) return;
+
+    let shouldSetupSubtitles = false;
+
+    subtitles?.forEach((sub) => {
+      const track = document.createElement('track');
+      track.kind = 'subtitles';
+      track.label = sub.label;
+      track.srclang = sub.lang;
+      track.src = sub.src;
+
+      track.addEventListener('load', () => {
+        console.warn('[track loaded]');
+      });
+
+      videoEl.appendChild(track);
+
+      shouldSetupSubtitles = true;
+    });
+
+    if (shouldSetupSubtitles) videoAPI?.setupSubtitles();
+
+    return () => {
+      for (const i in videoEl.children) {
+        const child = videoEl.children.item(parseInt(i));
+
+        if (child?.nodeName.toLowerCase() === 'track') {
+          child.remove();
+        }
+      }
+    };
+  }, [subtitles, videoEl, videoAPI]);
 
   useEffect(() => {
     // effect
@@ -200,19 +238,6 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
     <div className="syncouch-player" ref={videoPlayerRef}>
       <video id="syncouch-video" ref={videoRef}>
         <source src={src} type={type || 'video/mp4'}></source>
-
-        {subtitles &&
-          subtitles.map((subtitle, index) => (
-            <track
-              key={`subtitle__${index}`}
-              id={index.toString()}
-              label={subtitle.label}
-              kind="subtitles"
-              srcLang={subtitle.lang}
-              src={subtitle.src}
-              default={!!subtitle.default}
-            ></track>
-          ))}
       </video>
 
       <div className="video-subtitles" dangerouslySetInnerHTML={{ __html: subtitle }}></div>
@@ -239,4 +264,4 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
   );
 };
 
-export default SyncouchPlayer;
+export default React.memo(SyncouchPlayer);

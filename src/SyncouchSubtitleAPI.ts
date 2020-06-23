@@ -35,7 +35,9 @@ export class SyncouchSubtitleAPI extends EventEmitter {
   init() {
     const { track } = this;
 
-    if (!track.cues) return;
+    if (!track.cues) {
+      return;
+    }
 
     for (let i = 0; i < track.cues.length; i += 1) {
       const cue = track.cues?.[i] as VTTCue;

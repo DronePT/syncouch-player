@@ -32,6 +32,7 @@ export const useSyncouchVideoActions = (
   const subtitleClickHandler = useCallback(
     (index: number) => {
       if (!videoAPI) return;
+
       videoAPI.setSubtitle(index);
     },
     [videoAPI]

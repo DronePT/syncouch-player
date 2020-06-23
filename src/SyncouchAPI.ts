@@ -115,7 +115,7 @@ export class SyncouchAPI extends EventEmitter {
     };
   }
 
-  private setupSubtitles() {
+  public setupSubtitles() {
     const { textTracks } = this.video;
 
     // hide native subtitles display
