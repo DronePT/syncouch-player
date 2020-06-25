@@ -54,6 +54,7 @@ export class SyncouchSubtitleAPI extends EventEmitter {
 
         cue.addEventListener('enter', this.cueEvents[`${cue.startTime}-enter`]);
         cue.addEventListener('exit', this.cueEvents[`${cue.startTime}-exit`]);
+        console.count('[cue-activate]');
       }
     }
   }

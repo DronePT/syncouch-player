@@ -1,10 +1,18 @@
 import { useCallback } from 'react';
 import { SyncouchAPI } from './SyncouchAPI';
 
+export interface SyncouchActions {
+  playPauseHandler: () => void;
+  videoSeekHandler: (seekTime: number) => void;
+  volumeChangeHandler: (volume: number) => void;
+  subtitleClickHandler: (index: number) => void;
+  fullScreenClickHandler: () => void;
+}
+
 export const useSyncouchVideoActions = (
   videoAPI: SyncouchAPI | null,
   videoPlayerElement: HTMLDivElement | null
-) => {
+): SyncouchActions => {
   const playPauseHandler = useCallback(() => {
     if (!videoAPI) return;
     videoAPI.toggle();

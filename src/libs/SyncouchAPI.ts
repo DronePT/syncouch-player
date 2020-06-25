@@ -19,10 +19,10 @@ export class SyncouchAPI extends EventEmitter {
     this.video = video;
     this.isPlaying = false;
 
-    this.init();
+    this.initialize();
   }
 
-  private init() {
+  private initialize() {
     const { video } = this;
 
     const handleEvent = (event: Event) => {
