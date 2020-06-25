@@ -3,8 +3,8 @@ import { debounce } from 'lodash';
 
 import './SyncouchPlayer.scss';
 
-import { SyncouchAPI, VideoDimensions } from './SyncouchAPI';
-import { useSyncouchVideoActions } from './SyncouchActions';
+import { SyncouchAPI, VideoDimensions } from '../libs/SyncouchAPI';
+import { useSyncouchVideoActions } from '../libs/SyncouchActions';
 
 // Components
 import SyncouchControls from './SyncouchControls';

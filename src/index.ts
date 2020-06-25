@@ -1,5 +1,5 @@
-import SyncouchPlayer from './SyncouchPlayer';
+import SyncouchPlayer from './components/SyncouchPlayer';
 
-export * from './SyncouchAPI';
+export * from './libs/SyncouchAPI';
 
 export default SyncouchPlayer;
