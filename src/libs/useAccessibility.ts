@@ -108,6 +108,10 @@ export const useAccessibility = (
     document.addEventListener('fullscreenchange', fullScreenHandler);
 
     return () => {
+      hideControls.cancel();
+      mouseMoveHandler.cancel();
+      windowResizeHandler.cancel();
+
       window.removeEventListener('resize', windowResizeHandler);
       document.removeEventListener('mousemove', mouseMoveHandler);
       document.removeEventListener('keyup', keyUpDownHandler);

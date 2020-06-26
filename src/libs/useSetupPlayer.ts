@@ -66,6 +66,21 @@ export const useSetupPlayer = (videoEl: HTMLVideoElement | null, deps: SetupPlay
     videoAPI.addListener('video-dimensions', (dimensions) => onDimensionsReady?.(dimensions));
     videoAPI.addListener('video-ready', () => onVideoReady?.());
     videoAPI.addListener('video-loading', () => onVideoLoading?.());
+
+    return () => {
+      videoAPI.removeAllListeners('subtitle-enter');
+      videoAPI.removeAllListeners('subtitle-exit');
+      videoAPI.removeAllListeners('video-play');
+      videoAPI.removeAllListeners('video-pause');
+      videoAPI.removeAllListeners('video-time');
+      videoAPI.removeAllListeners('video-seek');
+      videoAPI.removeAllListeners('video-volume');
+      videoAPI.removeAllListeners('video-duration');
+      videoAPI.removeAllListeners('video-buffer');
+      videoAPI.removeAllListeners('video-dimensions');
+      videoAPI.removeAllListeners('video-ready');
+      videoAPI.removeAllListeners('video-loading');
+    };
   }, [videoEl]);
 
   return { subtitle, videoAPI, isPlaying, currentTime, buffer, volume };
