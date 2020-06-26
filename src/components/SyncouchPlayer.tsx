@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 
 import './SyncouchPlayer.scss';
 
@@ -10,12 +10,14 @@ import SyncouchControls from './SyncouchControls';
 import { Subtitle } from './SyncouchSubtitles';
 import { useSetupSubtitles, useAccessibility } from '../libs';
 import { useSetupPlayer } from '../libs/useSetupPlayer';
+import clsx from 'clsx';
 
 interface SyncouchPlayerProps {
   children?: React.ReactNode;
   src: string;
   type?: string;
   label?: string;
+  title?: string;
   subtitles?: Subtitle[];
   onPlayerReady?(video: SyncouchAPI): void;
   onPlay?(time?: number): void;
@@ -32,6 +34,7 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
   src,
   type,
   label,
+  title,
   onPlay,
   onPause,
   onSeeked,
@@ -69,8 +72,17 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
 
   useSetupSubtitles(subtitles, videoRef.current, videoAPI);
 
+  const titleStyling = useMemo(() => {
+    return clsx('syncouch-title', {
+      'is-visible': isControlsVisible,
+    });
+  }, [isControlsVisible]);
+
   return (
     <div className="syncouch-player" ref={videoPlayerRef}>
+      {title && (
+        <div className={titleStyling}>21.Bridges.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4</div>
+      )}
       <video id="syncouch-video" ref={videoRef}>
         {videoAPI && <source src={src} type={type || 'video/mp4'}></source>}
       </video>
