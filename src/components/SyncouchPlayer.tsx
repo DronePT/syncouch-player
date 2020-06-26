@@ -80,9 +80,7 @@ const SyncouchPlayer: React.FC<SyncouchPlayerProps> = ({
 
   return (
     <div className="syncouch-player" ref={videoPlayerRef}>
-      {title && (
-        <div className={titleStyling}>21.Bridges.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4</div>
-      )}
+      {title && <div className={titleStyling}>{title}</div>}
       <video id="syncouch-video" ref={videoRef}>
         {videoAPI && <source src={src} type={type || 'video/mp4'}></source>}
       </video>
